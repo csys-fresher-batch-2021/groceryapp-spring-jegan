@@ -3,22 +3,50 @@ package com.jegan.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jegan.dao.vegetableRepository;
+import com.jegan.dao.VegetableRepository;
+import com.jegan.exceptions.ServiceException;
 import com.jegan.model.Vegetable;
+import com.jegan.validator.VegetableManagerValidator;
 
 @Service
 public class VegetableService {
 	
 @Autowired
-vegetableRepository vegetable;
+VegetableRepository vegetableRep;
 
 public Iterable<Vegetable> getAllVegetables()
 {
-	return vegetable.findAll();
+	return vegetableRep.findAll();
 }
 
-public String deleteVegtable(String vegetableName)
+
+public void deleteVegetableById(Integer id)
 {
-	return vegetable.deleteByVegetableName(vegetableName);
+	try
+	{
+		vegetableRep.deleteById(id);
+	}catch (Exception e) {
+		e.printStackTrace();
+		throw new ServiceException("unable to delete");
+}
+}
+
+public void addVegetable(Vegetable vegetable)
+{
+	try
+	{
+		VegetableManagerValidator.checkForNullandEmpty(vegetable.getVegetableName());
+		VegetableManagerValidator.checkNotNumeric(vegetable.getVegetableName());
+		VegetableManagerValidator.checkForPriceInvalidNumandNull(vegetable.getPrice());
+		VegetableManagerValidator.checkForQuantityInvalidNumandNull(vegetable.getQuantity());
+		
+		vegetableRep.save(vegetable);
+	}
+	catch(Exception e )
+	{
+		e.printStackTrace();
+		throw new ServiceException("Unable to Add Vegetable");
+	}
+
 }
 }

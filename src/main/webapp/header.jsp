@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
+<script src="assets/js/axios.min.js"></script>
+
+
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="index.jsp">GroceryApp</a>
@@ -16,11 +19,11 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="addVegetable.jsp">Add Vegetables</a>
+        <a class="nav-link" href="AddVegetable.jsp">Add Vegetables</a>
       </li>
     
        <li class="nav-item">
-        <a class="nav-link" href="ListVegetables.jsp">Vegetables</a>
+        <a class="nav-link" href="ListVegetable.jsp">Vegetables</a>
       </li>
     </ul>
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">

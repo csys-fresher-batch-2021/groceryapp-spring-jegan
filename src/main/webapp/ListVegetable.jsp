@@ -15,7 +15,7 @@
 		<caption>Showing the List of Vegetables</caption>
 		<thead>
 		<tr><th id="col">Sno</th> <th id="col">Vegetable Name</th> <th id="col">Price(per kg)</th> 
-		<th id="col">Quantity</th>
+		<th id="col">Quantity(kg)</th>
 		<th id="col">Delete</th>
 	    </tr>
 		
@@ -29,7 +29,7 @@
 		  function getAllVegetables()
 		  {
 			  
-			  let url="vegetables";
+			  let url="ListVegetables";
 			  fetch(url).then(res=> res.json()).then(res=>{
 				  console.log("Response",res);
 				  let vegetables = res;
@@ -37,33 +37,32 @@
 				 let i=0;
 				 for(let vegetable of vegetables)
 					 {
-					      content+="<tr><td>"+ ++i +  "</td><td>" + vegetable.vegetableName + "</td><td>" + vegetable.price + "</td><td>" + vegetable.quantity + "</td>"; 
-					      content+="<td><button class = 'btn btn-danger' onclick = \"remove('"+vegetable.vegetableName+"')\">Remove</button</td></tr>"; 
+					      content+="<tr><td>"+ ++i +  "</td><td>" + vegetable.vegetableName + "</td><td> Rs. " + vegetable.price + "</td><td>" + vegetable.quantity + " kg</td>"; 
+					      content+="<td><button class = 'btn btn-danger' onclick = \"remove('"+vegetable.id+"')\">Remove</button</td></tr>"; 
 					 }
 			         console.log("Content",content);
 				 document.querySelector("#vegetable").innerHTML = content;
 			  });
 		  }
 		  
-		   function remove(vegetableName)
+		   function remove(id)
 		  {
-			  const queryParams = "?vegetableName " + vegetableName;
-			  let url = "vegetables/DeleteVegetable" + queryParams;
-			  console.log("Vegetable Name"+ url);
+			  let url = "DeleteVegetableById?id=" + id;
+			  console.log(url);
 			  content="";
 				fetch(url).then(res=> res.json()).then(res=>{
 					console.log("Success");
 					 let data = res;
 					console.log(data);
 					content+=data.infoMessage;
-					document.querySelector("#message").innerHTML= content;
+					alert(content);
+					window.location.href="ListVegetable.jsp";
 				}).catch(err=>{
 					console.log("Error");
-					let data = err.response;
+					 let data = err.response;
 					console.log(data);	
 					content+=data.errorMessage;
-					document.querySelector("#message").innerHTML= content;
-					 
+					document.querySelector("#message").innerHTML= content; 	 
 				});
 		  } 
 		  getAllVegetables();
