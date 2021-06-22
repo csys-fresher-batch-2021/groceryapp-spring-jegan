@@ -14,6 +14,7 @@ public class VegetableService {
 @Autowired
 VegetableRepository vegetableRep;
 
+
 public Iterable<Vegetable> getAllVegetables()
 {
 	return vegetableRep.findAll();
@@ -45,7 +46,7 @@ public void addVegetable(Vegetable vegetable)
 	catch(Exception e )
 	{
 		e.printStackTrace();
-		throw new ServiceException("Unable to Add Vegetable");
+		throw new ServiceException(e.getMessage());
 	}
 
 }

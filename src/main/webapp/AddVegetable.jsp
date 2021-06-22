@@ -14,7 +14,7 @@
 
 	<h1>Add Vegetable</h1>
 	<form onsubmit="addVegetable()" method="post">
-	<p id="message"></p>
+	<p style ="color:red" id="message"> </p>
 		<label for="vegetableName">Vegetable Name : </label> <input
 			type="text" name="vegetableName" id="vegetableName"
 			placeholder="Enter the VegetableName" required autofocus /> <br>
@@ -36,17 +36,18 @@ function addVegetable()
     let vegetable = {
     		"vegetableName" : vegetableName,
     		"price" : vegetablePrice,
-    		"quantity" : vegetableQuantity,
+    		"quantity" : vegetableQuantity
     };
     console.log(vegetable);
     let url = "AddVegetable";
-    content = "";
+    let content = "";
     axios.post(url,vegetable).then(res=>{
     	console.log("Success");
 		let data = res.data;
 		console.log(data);
 		content+=data.infoMessage;
-		document.querySelector("#message").innerHTML= content;	
+		alert(content);
+		window.location.href = "ListVegetable.jsp";
     }).catch(err=>{
 		console.log("Error");
 		let data = err.response.data;
