@@ -61,7 +61,7 @@ function addUser()
 		console.log(data);
 		content+=data.infoMessage;
 		alert(content);
-		window.location.href = "ListVegetable.jsp";
+		window.location.href = "SuccessRegister.jsp";
     }).catch(err=>{
 		console.log("Error");
 		let data = err.response.data;

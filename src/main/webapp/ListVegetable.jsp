@@ -9,16 +9,18 @@
 <body>
   <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<%String role=(String)session.getAttribute("ROLE");%>
 		<h3>List Of Vegetables</h3>
 		<p id="message"></p>
 		<table class="table table-bordered">
 		<caption>Showing the List of Vegetables</caption>
 		<thead>
-		<tr><th id="col">Sno</th> <th id="col">Vegetable Name</th> <th id="col">Price(per kg)</th> 
+		<tr><th id="col">Sno</th> <th id="col">Vegetable Name</th> <th id="col">Price(per kg)</th>
 		<th id="col">Quantity(kg)</th>
+		<% if(role!=null && role.equalsIgnoreCase("admin")){%> 
 		<th id="col">Delete</th>
 	    </tr>
-		
+		<%} %>
 		</thead>
 		<tbody id="vegetable">	
 			
@@ -34,11 +36,16 @@
 				  console.log("Response",res);
 				  let vegetables = res;
 				 let content = "";
+				 let role = localStorage.getItem("ROLE");
+				 console.log(role);
 				 let i=0;
 				 for(let vegetable of vegetables)
 					 {
-					      content+="<tr><td>"+ ++i +  "</td><td>" + vegetable.vegetableName + "</td><td> Rs. " + vegetable.price + "</td><td>" + vegetable.quantity + " kg</td>"; 
-					      content+="<td><button class = 'btn btn-danger' onclick = \"remove('"+vegetable.id+"')\">Remove</button</td></tr>"; 
+					      content+="<tr><td>"+ ++i +  "</td><td>" + vegetable.vegetableName + "</td><td> Rs. " + vegetable.price + "</td><td>" + vegetable.quantity + " kg</td>";
+					      if(role == "ADMIN")
+					    	  {
+					             content+="<td><button class = 'btn btn-danger' onclick = \"remove('"+vegetable.id+"')\">Remove</button</td></tr>"; 
+					    	  }
 					 }
 			         console.log("Content",content);
 				 document.querySelector("#vegetable").innerHTML = content;

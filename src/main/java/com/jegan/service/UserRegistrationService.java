@@ -1,11 +1,14 @@
 package com.jegan.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jegan.dao.UserRepository;
 import com.jegan.exceptions.ServiceException;
 import com.jegan.model.UserRegistration;
+import com.jegan.validator.UserLoginValidator;
 import com.jegan.validator.UserRegistrationValidator;
 
 
@@ -53,4 +56,13 @@ public class UserRegistrationService {
 		return validUser;
 	}
 
+	public void userLogin(String userEmail , String passWord)
+	{
+		try {
+			Optional<UserRegistration> user = userRep.findByUserEmailAndPassword(userEmail, passWord);
+			UserLoginValidator.isValidUser(user);
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 }
