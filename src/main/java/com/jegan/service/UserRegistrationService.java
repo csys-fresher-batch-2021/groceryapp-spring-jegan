@@ -56,7 +56,7 @@ public class UserRegistrationService {
 		return validUser;
 	}
 
-	public void userLogin(String userEmail , String passWord)
+	public boolean userLogin(String userEmail , String passWord)
 	{
 		try {
 			Optional<UserRegistration> user = userRep.findByUserEmailAndPassword(userEmail, passWord);
@@ -64,5 +64,6 @@ public class UserRegistrationService {
 		} catch (Exception e) {
 			throw new ServiceException(e.getMessage());
 		}
+		return true;
 	}
 }

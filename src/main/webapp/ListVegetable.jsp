@@ -17,10 +17,12 @@
 		<thead>
 		<tr><th id="col">Sno</th> <th id="col">Vegetable Name</th> <th id="col">Price(per kg)</th>
 		<th id="col">Quantity(kg)</th>
-		<% if(role!=null && role.equalsIgnoreCase("admin")){%> 
+		<% if(role!=null && role.equalsIgnoreCase("ADMIN")){%> 
 		<th id="col">Delete</th>
-	    </tr>
 		<%} %>
+		<% if(role!=null && role.equalsIgnoreCase("USER")){%>
+		 <th id="col">Book</th> </tr>
+		 <%} %>
 		</thead>
 		<tbody id="vegetable">	
 			
@@ -42,6 +44,10 @@
 				 for(let vegetable of vegetables)
 					 {
 					      content+="<tr><td>"+ ++i +  "</td><td>" + vegetable.vegetableName + "</td><td> Rs. " + vegetable.price + "</td><td>" + vegetable.quantity + " kg</td>";
+					      if(role == "USER")
+					    	  {
+					    	  	let obj = JSON.stringify(vegetable);
+					    	  content+="<td><button class = 'btn btn-primary' onclick='order("+obj+")'>Add to Cart</button</td></tr>"					    	  }
 					      if(role == "ADMIN")
 					    	  {
 					             content+="<td><button class = 'btn btn-danger' onclick = \"remove('"+vegetable.id+"')\">Remove</button</td></tr>"; 
@@ -72,6 +78,14 @@
 					document.querySelector("#message").innerHTML= content; 	 
 				});
 		  } 
+		   
+		   function order(order)
+		   {
+			   alert("Added to your cart");
+			   localStorage.setItem("order",JSON.stringify(order));
+			   window.location.href="Order.jsp";
+			  
+		   }
 		  getAllVegetables();
 		</script>
 </main>	

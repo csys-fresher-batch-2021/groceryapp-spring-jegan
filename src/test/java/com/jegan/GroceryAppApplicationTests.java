@@ -1,4 +1,4 @@
-package com.example.grocery.app;
+package com.jegan;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
