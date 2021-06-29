@@ -50,15 +50,16 @@ String role=(String)session.getAttribute("ROLE");
      <a class="nav-link" href="#">Welcome <%=userEmail %></a>
    </li>
    <%} %>
+          <% if(role != null && role.equalsIgnoreCase("USER")) {%>
       <li class="nav-item">
-        <a class="nav-link" href="orderDetails.jsp">Cart</a>
+        <a class="nav-link" href="OrderDetails.jsp">Cart</a>
       </li>
      <%} %>
       <li class="nav-item">
         <a class="nav-link" href="Logout" onclick="logout()">Logout</a>
       </li>
       </ul>
-   
+     <%} %>
   </div>
 </nav>
 </header>
