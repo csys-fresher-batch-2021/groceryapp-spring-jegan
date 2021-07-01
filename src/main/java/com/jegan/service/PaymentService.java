@@ -22,8 +22,6 @@ public class PaymentService {
 		for(CartItems item: cartItems)
 		{
 			grossTotal = grossTotal + item.getTotalPrice() ;
-			//OrderDetailsDAO dao = new OrderDetailsDAO();
-			//dao.save(item);
 			order.insert(item);
 		}
 		return grossTotal;

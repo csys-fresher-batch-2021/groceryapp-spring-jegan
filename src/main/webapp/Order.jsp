@@ -63,6 +63,8 @@
 			document.getElementById("totalPrice").value = vegetablePrice
 					* vegetableQuantity.value;
 		}
+		
+		
 	</script>
 
 </body>

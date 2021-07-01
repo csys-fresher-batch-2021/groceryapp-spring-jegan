@@ -9,6 +9,11 @@
 <body>
 
 <jsp:include page="header.jsp"></jsp:include>
+
+<%
+String userEmail = (String)session.getAttribute("LOGGED_IN_USEREMAIL");
+%>
+
 	
 	<main class="container-fluid">
 	<h3>Order Details</h3>
@@ -33,6 +38,7 @@
 	<br>
 	<br>
 	<a class="btn btn-success" role="button" href="ListVegetable.jsp"><strong>order again</strong></a>
+	<a class="btn btn-primary" role="button" onclick=" userPurchase()"><strong>Buy Now</strong></a>
 	</main>
 	<script>
 	function orderedList(){
@@ -54,7 +60,32 @@
 		 document.querySelector("#cart").innerHTML = content;
 		 document.querySelector("#grossTotal").value = sum;
 
-
+	}
+	
+	function userPurchase(){
+		let grossTotal = document.querySelector("#grossTotal").value;
+		let email = "<%=userEmail%>";
+		let user_histroy = {
+				"totalAmount":  grossTotal,
+				"userEmail" : email
+		};
+		console.log(user_histroy);
+		 let url = "UserPurchase";
+		    let content = "";
+		    axios.post(url,user_histroy).then(res=>{
+		    	console.log("Success");
+				let data = res.data;
+				console.log(data);
+				content+=data.infoMessage;
+				alert("order placed successfully!");
+				window.location.href="Home.jsp";
+		    }).catch(err=>{
+				console.log("Error");
+				let data = err.response.data;
+				console.log(data);	
+				content+=data.errorMessage;
+				document.querySelector("#message").innerHTML= content;
+		    });
 	}
 	
 	orderedList();

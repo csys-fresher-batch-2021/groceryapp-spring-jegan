@@ -24,6 +24,9 @@ String role=(String)session.getAttribute("ROLE");
       <li class="nav-item">
         <a class="nav-link" href="AddVegetable.jsp">Add Vegetables</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="UserPurchaseDetails.jsp">UserPurchase Details</a>
+      </li>
     <%} %>
        <li class="nav-item">
         <a class="nav-link" href="ListVegetable.jsp">Vegetables</a>
